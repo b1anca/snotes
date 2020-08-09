@@ -1,6 +1,6 @@
 import React from "react"
-import "./gallery.css"
 import { useStaticQuery, graphql } from "gatsby"
+import styled from "styled-components"
 
 const Gallery = () => {
   const data = useStaticQuery(graphql`
@@ -15,16 +15,36 @@ const Gallery = () => {
     }
   `)
   const clImages = data.allCloudinaryMedia.edges
+
   return (
     <div>
-      <div className="image-grid">
+      <Grid>
         {clImages.map((image, index) => (
-          <div className="image-item" key={`${index}-cl`}>
-            <img src={image.node.secure_url} alt={"no alt :("} />
+          <div key={`${index}-cl`}>
+            <Image src={image.node.secure_url} alt={`image${index}`} />
           </div>
         ))}
-      </div>
+      </Grid>
     </div>
   )
 }
+
+const Grid = styled.div`
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: minmax(50px, auto);
+
+  > .image-item:nth-child(5n) {
+    grid-column-end: span 2;
+  }
+`
+
+const Image = styled.img`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`
+
 export default Gallery
