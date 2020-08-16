@@ -1,7 +1,7 @@
 {
   "name": "snotes",
   "private": true,
-  "description": "Mind maps gallery",
+  "description": "Mind Map gallery",
   "version": "0.1.0",
   "author": "Bianca Vieira <bncvr@outlook.com>",
   "dependencies": {
