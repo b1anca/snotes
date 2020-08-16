@@ -1,6 +1,7 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 
 const Gallery = () => {
   const data = useStaticQuery(graphql`
@@ -21,7 +22,11 @@ const Gallery = () => {
       <Grid>
         {clImages.map((image, index) => (
           <div key={`${index}-cl`}>
-            <Image src={image.node.secure_url} alt={`image${index}`} />
+            <TransformWrapper>
+              <TransformComponent>
+                <Image src={image.node.secure_url} alt={`image${index}`} />
+              </TransformComponent>
+            </TransformWrapper>
           </div>
         ))}
       </Grid>
@@ -32,10 +37,10 @@ const Gallery = () => {
 const Grid = styled.div`
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
   grid-auto-rows: minmax(50px, auto);
 
-  > .image-item:nth-child(5n) {
+  img:nth-child(5n) {
     grid-column-end: span 2;
   }
 `
