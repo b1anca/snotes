@@ -1,33 +1,35 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
+import Img from "gatsby-image"
 
 const Gallery = () => {
   const data = useStaticQuery(graphql`
-    query CloudinaryImage {
-      allCloudinaryMedia {
-        edges {
-          node {
-            secure_url
+    query {
+      allFile(filter: { sourceInstanceName: { eq: "images/gallery" } }) {
+        nodes {
+          id
+          name
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
           }
         }
       }
     }
   `)
-  const clImages = data.allCloudinaryMedia.edges
+  const images = data.allFile.nodes
 
   return (
     <div>
       <Grid>
-        {clImages.map((image, index) => (
-          <div key={`${index}-cl`}>
-            <TransformWrapper>
-              <TransformComponent>
-                <Image src={image.node.secure_url} alt={`image${index}`} />
-              </TransformComponent>
-            </TransformWrapper>
-          </div>
+        {images.map(image => (
+          <Img
+            key={image.id}
+            alt={image.name}
+            fluid={image.childImageSharp.fluid}
+          />
         ))}
       </Grid>
     </div>
@@ -38,10 +40,6 @@ const Grid = styled.div`
   display: grid;
   grid-gap: 10px;
   grid-template-columns: repeat(3, 33%);
-`
-
-const Image = styled.img`
-  border-radius: 6px;
 `
 
 export default Gallery
