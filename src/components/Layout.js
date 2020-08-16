@@ -2,8 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
-
-import Header from "./header"
+import Header from "./Header"
 import "./layout.css"
 
 const Layout = ({ children }) => {
@@ -18,18 +17,23 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
+    <LayoutContainer>
       <Header siteTitle={data.site.siteMetadata.title} />
       <Container>
         <main>{children}</main>
       </Container>
-    </>
+    </LayoutContainer>
   )
 }
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
+
+const LayoutContainer = styled.div`
+  background-color: rgb(34, 40, 49);
+  min-height: 100vh;
+`
 
 const Container = styled.div`
   margin: 0 auto;

@@ -37,19 +37,11 @@ const Gallery = () => {
 const Grid = styled.div`
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-  grid-auto-rows: minmax(50px, auto);
-
-  img:nth-child(5n) {
-    grid-column-end: span 2;
-  }
+  grid-template-columns: repeat(3, 33%);
 `
 
 const Image = styled.img`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  border-radius: 6px;
 `
 
 export default Gallery
