@@ -1,3 +1,6 @@
+# Local images
+gallery/
+
 # Logs
 logs
 *.log
